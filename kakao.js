@@ -1,27 +1,20 @@
+let geocoder;
+
+kakao.maps.load(function () {
+  geocoder = new kakao.maps.services.Geocoder();
+});
+
 function searchAddress(keyword, callback) {
+  if (!geocoder) {
+    document.getElementById("addressResult").innerText = "지도 로딩 중... 다시 시도하세요";
+    return;
+  }
 
-  const places = new kakao.maps.services.Places();
-
-  // 1. 키워드로 장소 검색 (학교, 회사명 가능)
-  places.keywordSearch(keyword, function(data, status) {
-
+  geocoder.addressSearch(keyword, function(result, status) {
     if (status === kakao.maps.services.Status.OK) {
-
-      const place = data[0];
-
-      const address = place.address_name;
-      const lat = place.y;
-      const lng = place.x;
-
-      document.getElementById("addressResult").innerText =
-        "검색된 위치: " + place.place_name + " (" + address + ")";
-
-      callback(address, lat, lng);
-
+      callback(result[0].address_name, result[0].y, result[0].x);
     } else {
-      document.getElementById("addressResult").innerText =
-        "장소를 찾을 수 없습니다.";
+      document.getElementById("addressResult").innerText = "주소 검색 실패";
     }
-
   });
 }
