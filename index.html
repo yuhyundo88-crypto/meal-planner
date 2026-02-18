@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>밥친구 - 식단 추천</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_JAVASCRIPT_KEY&libraries=services"></script>
+</head>
+<body>
+
+  <h1>🍽 밥친구 식단 추천기</h1>
+
+  <div class="input-box">
+    <input type="text" id="locationInput" placeholder="학교 또는 직장 이름 입력">
+    <input type="number" id="budgetInput" placeholder="월 식비 입력 (예: 200000)">
+    <button onclick="generateMealPlan()">식단 생성</button>
+  </div>
+
+  <div id="addressResult"></div>
+  <div id="calendar"></div>
+
+  <script src="kakao.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
